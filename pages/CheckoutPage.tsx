@@ -5,10 +5,10 @@ import { useNavigate } from 'react-router-dom';
 
 const FormInput: React.FC<React.InputHTMLAttributes<HTMLInputElement> & { label: string }> = ({ label, id, ...props }) => (
   <div>
-    <label htmlFor={id} className="block text-sm font-medium text-gray-700 mb-1">{label}</label>
+    <label htmlFor={id} className="block text-sm font-medium text-gray-700 dark:text-dark-text-secondary mb-1">{label}</label>
     <input
       id={id}
-      className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-accent-gold focus:border-accent-gold"
+      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-dark-surface text-dark-text dark:text-dark-text-primary rounded-md shadow-sm focus:outline-none focus:ring-accent-gold focus:border-accent-gold"
       {...props}
     />
   </div>
@@ -58,12 +58,12 @@ export const CheckoutPage: React.FC = () => {
   const finalTotal = totalPrice + shippingCost;
 
   return (
-    <div className="bg-off-white min-h-screen py-12">
+    <div className="bg-off-white dark:bg-dark-bg min-h-screen py-12">
       <div className="container mx-auto px-4 fade-in-up">
-        <h1 className="text-3xl font-bold text-center mb-8">إتمام الشراء</h1>
+        <h1 className="text-3xl font-bold text-center mb-8 dark:text-dark-text-primary">إتمام الشراء</h1>
         <form onSubmit={handleSubmit} className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          <div className="lg:col-span-2 bg-white p-6 rounded-lg shadow-md">
-            <h2 className="text-xl font-bold mb-4">معلومات العميل</h2>
+          <div className="lg:col-span-2 bg-white dark:bg-dark-surface p-6 rounded-lg shadow-md dark:shadow-none">
+            <h2 className="text-xl font-bold mb-4 dark:text-dark-text-primary">معلومات العميل</h2>
             <div className="space-y-4">
               <FormInput label="الاسم الكامل" id="fullName" type="text" value={formData.fullName} onChange={handleInputChange} required />
               <FormInput label="رقم الجوال" id="phone" type="tel" value={formData.phone} onChange={handleInputChange} required />
@@ -71,9 +71,9 @@ export const CheckoutPage: React.FC = () => {
               <FormInput label="العنوان التفصيلي" id="address" type="text" value={formData.address} onChange={handleInputChange} required />
             </div>
           </div>
-          <div className="bg-white p-6 rounded-lg shadow-md h-fit">
-            <h2 className="text-xl font-bold mb-4">ملخص الطلب</h2>
-            <div className="space-y-2 max-h-60 overflow-y-auto custom-scrollbar pr-2 mb-4">
+          <div className="bg-white dark:bg-dark-surface p-6 rounded-lg shadow-md dark:shadow-none h-fit">
+            <h2 className="text-xl font-bold mb-4 dark:text-dark-text-primary">ملخص الطلب</h2>
+            <div className="space-y-2 max-h-60 overflow-y-auto custom-scrollbar pr-2 mb-4 text-dark-text dark:text-dark-text-secondary">
                 {cartItems.map(item => (
                     <div key={item.id} className="flex justify-between text-sm">
                         <span className="flex-1 truncate">{item.name} x{item.quantity}</span>
@@ -81,7 +81,7 @@ export const CheckoutPage: React.FC = () => {
                     </div>
                 ))}
             </div>
-             <div className="space-y-2 mb-4 border-t pt-2">
+             <div className="space-y-2 mb-4 border-t dark:border-gray-700 pt-2 text-dark-text dark:text-dark-text-secondary">
               <div className="flex justify-between">
                 <span>المجموع الفرعي</span>
                 <span>{totalPrice.toFixed(2)} ر.س</span>
@@ -90,7 +90,7 @@ export const CheckoutPage: React.FC = () => {
                 <span>الشحن</span>
                 <span>{shippingCost.toFixed(2)} ر.س</span>
               </div>
-              <div className="flex justify-between font-bold text-lg pt-2 border-t mt-2">
+              <div className="flex justify-between font-bold text-lg pt-2 border-t dark:border-gray-700 mt-2 text-dark-text dark:text-dark-text-primary">
                 <span>الإجمالي</span>
                 <span>{finalTotal.toFixed(2)} ر.س</span>
               </div>

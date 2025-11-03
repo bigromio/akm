@@ -8,15 +8,15 @@ export const Footer: React.FC = () => {
   ];
   
   return (
-    <footer className="bg-light-beige pt-12 pb-6">
+    <footer className="bg-light-beige dark:bg-dark-surface pt-12 pb-6">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8 text-dark-text">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8 text-dark-text dark:text-dark-text-secondary">
           <div>
             <h3 className="text-2xl font-bold text-pistachio mb-4">أكم<span className="text-accent-gold">.</span></h3>
             <p>من نكهة الأصالة... نُقدّم لك الأفضل.</p>
           </div>
           <div>
-            <h4 className="font-bold mb-4">روابط سريعة</h4>
+            <h4 className="font-bold mb-4 text-dark-text dark:text-dark-text-primary">روابط سريعة</h4>
             <ul>
               <li className="mb-2"><a href="#" className="hover:text-pistachio">عن المتجر</a></li>
               <li className="mb-2"><a href="#" className="hover:text-pistachio">سياسة الخصوصية</a></li>
@@ -24,15 +24,15 @@ export const Footer: React.FC = () => {
             </ul>
           </div>
           <div>
-            <h4 className="font-bold mb-4">تواصل معنا</h4>
+            <h4 className="font-bold mb-4 text-dark-text dark:text-dark-text-primary">تواصل معنا</h4>
             <div className="flex space-x-4 space-x-reverse">
               {socialIcons.map(social => (
-                <a key={social.name} href={social.link} className="text-dark-text hover:text-pistachio">{social.icon}</a>
+                <a key={social.name} href={social.link} className="text-dark-text dark:text-dark-text-secondary hover:text-pistachio">{social.icon}</a>
               ))}
             </div>
           </div>
           <div>
-            <h4 className="font-bold mb-4">وسائل الدفع المعتمدة</h4>
+            <h4 className="font-bold mb-4 text-dark-text dark:text-dark-text-primary">وسائل الدفع المعتمدة</h4>
             <div className="flex items-center space-x-2 space-x-reverse">
                 <MadaIcon className="h-8 w-8" />
                 <VisaIcon className="h-8 w-8" />
@@ -40,7 +40,7 @@ export const Footer: React.FC = () => {
             </div>
           </div>
         </div>
-        <div className="text-center text-sm text-gray-600 border-t border-accent-gold pt-6">
+        <div className="text-center text-sm text-gray-600 dark:text-dark-text-secondary border-t border-accent-gold/50 dark:border-accent-gold/30 pt-6">
           <p>&copy; {new Date().getFullYear()} متجر أكم. جميع الحقوق محفوظة.</p>
         </div>
       </div>

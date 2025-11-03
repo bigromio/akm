@@ -12,15 +12,15 @@ export const Newsletter: React.FC<NewsletterProps> = ({ onSubscribeClick }) => {
   };
 
   return (
-    <div className="bg-light-beige py-16">
+    <div className="bg-light-beige dark:bg-dark-surface py-16">
       <div className="container mx-auto px-4 text-center">
-        <h2 className="text-3xl font-bold text-dark-text mb-2">اشترك في نشرتنا البريدية</h2>
-        <p className="text-gray-600 mb-6">كن أول من يعرف عن عروضنا الحصرية ومنتجاتنا الجديدة!</p>
+        <h2 className="text-3xl font-bold text-dark-text dark:text-dark-text-primary mb-2">اشترك في نشرتنا البريدية</h2>
+        <p className="text-gray-600 dark:text-dark-text-secondary mb-6">كن أول من يعرف عن عروضنا الحصرية ومنتجاتنا الجديدة!</p>
         <form onSubmit={handleSubmit} className="max-w-md mx-auto flex">
           <input 
             type="email"
             placeholder="ادخل بريدك الإلكتروني"
-            className="w-full px-4 py-3 rounded-r-md border-gray-300 focus:outline-none focus:ring-2 focus:ring-pistachio"
+            className="w-full px-4 py-3 rounded-r-md border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-dark-text dark:text-dark-text-primary focus:outline-none focus:ring-2 focus:ring-pistachio"
             required
           />
           <Button type="submit" className="rounded-l-md rounded-r-none" variant="primary">

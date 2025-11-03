@@ -19,7 +19,7 @@ export const ProductDetailPage: React.FC = () => {
   }, [productId]);
 
   if (!product) {
-    return <div className="text-center py-20">المنتج غير موجود. <Link to="/" className="text-pistachio hover:underline">العودة للرئيسية</Link></div>;
+    return <div className="text-center py-20 dark:text-dark-text-secondary">المنتج غير موجود. <Link to="/" className="text-pistachio hover:underline">العودة للرئيسية</Link></div>;
   }
   
   const relatedProducts = mockProducts.filter(p => p.category === product.category && p.id !== product.id);
@@ -32,24 +32,24 @@ export const ProductDetailPage: React.FC = () => {
             <img src={product.imageUrl} alt={product.name} className="w-full rounded-lg shadow-lg" />
           </div>
           <div>
-            <h1 className="text-4xl font-bold text-dark-text mb-2">{product.name}</h1>
-            <p className="text-lg text-gray-500 mb-4">{product.weight}</p>
+            <h1 className="text-4xl font-bold text-dark-text dark:text-dark-text-primary mb-2">{product.name}</h1>
+            <p className="text-lg text-gray-500 dark:text-dark-text-secondary mb-4">{product.weight}</p>
             <p className="text-3xl font-bold text-pistachio mb-6">{product.price} <span className="text-lg">ر.س</span></p>
-            <p className="text-gray-700 leading-relaxed mb-6">{product.description}</p>
+            <p className="text-gray-700 dark:text-dark-text-secondary leading-relaxed mb-6">{product.description}</p>
             
             <div className="flex items-center gap-4 mb-6">
-              <label htmlFor="quantity" className="font-bold">الكمية:</label>
-              <div className="flex items-center border border-gray-300 rounded-md">
-                <button onClick={() => setQuantity(q => Math.max(1, q - 1))} className="px-4 py-2 text-xl hover:bg-light-beige rounded-r-md">-</button>
+              <label htmlFor="quantity" className="font-bold dark:text-dark-text-primary">الكمية:</label>
+              <div className="flex items-center border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-dark-surface">
+                <button onClick={() => setQuantity(q => Math.max(1, q - 1))} className="px-4 py-2 text-xl hover:bg-light-beige dark:hover:bg-gray-700 rounded-r-md dark:text-dark-text-primary">-</button>
                 <input 
                   type="number" 
                   id="quantity" 
                   value={quantity}
                   onChange={(e) => setQuantity(parseInt(e.target.value) > 0 ? parseInt(e.target.value) : 1)}
-                  className="w-16 text-center border-none focus:ring-0 font-bold text-lg" 
+                  className="w-16 text-center border-none focus:ring-0 font-bold text-lg bg-transparent text-dark-text dark:text-dark-text-primary" 
                   min="1"
                 />
-                <button onClick={() => setQuantity(q => q + 1)} className="px-4 py-2 text-xl hover:bg-light-beige rounded-l-md">+</button>
+                <button onClick={() => setQuantity(q => q + 1)} className="px-4 py-2 text-xl hover:bg-light-beige dark:hover:bg-gray-700 rounded-l-md dark:text-dark-text-primary">+</button>
               </div>
             </div>
 
@@ -58,7 +58,7 @@ export const ProductDetailPage: React.FC = () => {
         </div>
       </div>
       {relatedProducts.length > 0 && (
-          <div className="bg-light-beige">
+          <div className="bg-light-beige dark:bg-dark-surface">
               <ProductCarousel title="العملاء اشتروا أيضًا" products={relatedProducts} />
           </div>
       )}

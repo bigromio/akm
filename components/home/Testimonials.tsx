@@ -22,18 +22,18 @@ const mockTestimonials = [
 ];
 
 const TestimonialCard: React.FC<{ testimonial: typeof mockTestimonials[0] }> = ({ testimonial }) => (
-  <div className="bg-white p-6 rounded-lg shadow-md text-center">
-    <img src={testimonial.avatar} alt={testimonial.name} className="w-20 h-20 rounded-full mx-auto mb-4 border-4 border-light-beige" />
-    <p className="text-gray-600 italic mb-4">"{testimonial.quote}"</p>
+  <div className="bg-white dark:bg-dark-surface p-6 rounded-lg shadow-md dark:shadow-none dark:border dark:border-gray-800 text-center">
+    <img src={testimonial.avatar} alt={testimonial.name} className="w-20 h-20 rounded-full mx-auto mb-4 border-4 border-light-beige dark:border-gray-700" />
+    <p className="text-gray-600 dark:text-dark-text-secondary italic mb-4">"{testimonial.quote}"</p>
     <h4 className="font-bold text-pistachio">{testimonial.name}</h4>
   </div>
 );
 
 export const Testimonials: React.FC = () => {
   return (
-    <div className="py-16 bg-off-white">
+    <div className="py-16 bg-off-white dark:bg-dark-bg">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold text-center mb-10 text-dark-text">ماذا يقول عملاؤنا</h2>
+        <h2 className="text-3xl font-bold text-center mb-10 text-dark-text dark:text-dark-text-primary">ماذا يقول عملاؤنا</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {mockTestimonials.map(testimonial => (
             <TestimonialCard key={testimonial.id} testimonial={testimonial} />

@@ -22,14 +22,14 @@ const SubscriptionModalContent: React.FC<{onClose: () => void}> = ({ onClose }) 
     return (
         <div className="text-center">
             <h2 className="text-2xl font-bold text-pistachio mb-2">اشترك لتصلك عروض أكم أولاً 🌿</h2>
-            <p className="text-dark-text mb-6">لا تفوت فرصة الحصول على خصومات حصرية على أجود المنتجات.</p>
+            <p className="text-dark-text dark:text-dark-text-secondary mb-6">لا تفوت فرصة الحصول على خصومات حصرية على أجود المنتجات.</p>
             <form onSubmit={handleSubmit}>
                 <input
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="بريدك الإلكتروني"
-                    className="w-full px-4 py-2 border border-gray-300 rounded-md mb-4 focus:outline-none focus:ring-2 focus:ring-pistachio"
+                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-dark-text dark:text-dark-text-primary rounded-md mb-4 focus:outline-none focus:ring-2 focus:ring-pistachio"
                     required
                 />
                 <Button type="submit" className="w-full">
@@ -76,7 +76,7 @@ export const HomePage: React.FC = () => {
 
       <HeroSlider />
       <ProductCarousel title="الأكثر مبيعًا" products={bestSellers} />
-      <div className="bg-light-beige">
+      <div className="bg-light-beige dark:bg-dark-surface">
           <ProductCarousel title="العروض الخاصة" products={specialOffers} />
       </div>
       <GiftSection />

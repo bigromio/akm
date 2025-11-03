@@ -46,15 +46,15 @@ export const ProductCarousel: React.FC<ProductCarouselProps> = ({ title, product
   return (
     <div className="py-12">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold text-center mb-8 text-dark-text">{title}</h2>
+        <h2 className="text-3xl font-bold text-center mb-8 text-dark-text dark:text-dark-text-primary">{title}</h2>
         <div className="relative">
           {canScrollLeft && (
             <button 
               onClick={() => handleScroll('left')} 
-              className="absolute -left-4 top-1/2 -translate-y-1/2 bg-white rounded-full p-2 shadow-lg hover:bg-light-beige z-10 hidden md:flex"
+              className="absolute -left-4 top-1/2 -translate-y-1/2 bg-white dark:bg-dark-surface rounded-full p-2 shadow-lg hover:bg-light-beige dark:hover:bg-gray-700 z-10 hidden md:flex"
               aria-label="Previous products"
             >
-              <ChevronLeftIcon className="h-6 w-6 text-dark-text" />
+              <ChevronLeftIcon className="h-6 w-6 text-dark-text dark:text-dark-text-primary" />
             </button>
           )}
           <div ref={scrollContainerRef} className="flex overflow-x-auto gap-6 pb-4 custom-scrollbar snap-x snap-mandatory">
@@ -67,10 +67,10 @@ export const ProductCarousel: React.FC<ProductCarouselProps> = ({ title, product
           {canScrollRight && (
              <button 
               onClick={() => handleScroll('right')} 
-              className="absolute -right-4 top-1/2 -translate-y-1/2 bg-white rounded-full p-2 shadow-lg hover:bg-light-beige z-10 hidden md:flex"
+              className="absolute -right-4 top-1/2 -translate-y-1/2 bg-white dark:bg-dark-surface rounded-full p-2 shadow-lg hover:bg-light-beige dark:hover:bg-gray-700 z-10 hidden md:flex"
               aria-label="Next products"
             >
-              <ChevronRightIcon className="h-6 w-6 text-dark-text" />
+              <ChevronRightIcon className="h-6 w-6 text-dark-text dark:text-dark-text-primary" />
             </button>
           )}
         </div>

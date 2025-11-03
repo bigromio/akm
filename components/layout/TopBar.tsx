@@ -3,7 +3,7 @@ import { WhatsappIcon } from '../icons/Icons';
 
 export const TopBar: React.FC = () => {
   return (
-    <div className="bg-light-beige text-dark-text text-sm">
+    <div className="bg-light-beige dark:bg-dark-surface text-dark-text dark:text-dark-text-secondary text-sm">
       <div className="container mx-auto px-4 py-2 flex justify-between items-center">
         <div className="flex items-center gap-2">
           <WhatsappIcon className="h-4 w-4 text-pistachio"/>

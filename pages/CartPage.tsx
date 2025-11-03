@@ -11,8 +11,8 @@ export const CartPage: React.FC = () => {
   if (cartCount === 0) {
     return (
       <div className="container mx-auto text-center py-20 px-4 fade-in-up">
-        <h1 className="text-3xl font-bold mb-4">سلة المشتريات فارغة</h1>
-        <p className="text-gray-600 mb-8">لم تقم بإضافة أي منتجات إلى السلة بعد.</p>
+        <h1 className="text-3xl font-bold mb-4 dark:text-dark-text-primary">سلة المشتريات فارغة</h1>
+        <p className="text-gray-600 dark:text-dark-text-secondary mb-8">لم تقم بإضافة أي منتجات إلى السلة بعد.</p>
         <Link to="/">
           <Button>
             ابدأ التسوق
@@ -23,26 +23,26 @@ export const CartPage: React.FC = () => {
   }
 
   return (
-    <div className="bg-off-white min-h-screen py-12">
+    <div className="bg-off-white dark:bg-dark-bg min-h-screen py-12">
       <div className="container mx-auto px-4 fade-in-up">
-        <h1 className="text-3xl font-bold text-center mb-8">سلة المشتريات</h1>
+        <h1 className="text-3xl font-bold text-center mb-8 dark:text-dark-text-primary">سلة المشتريات</h1>
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          <div className="lg:col-span-2 bg-white p-6 rounded-lg shadow-md">
+          <div className="lg:col-span-2 bg-white dark:bg-dark-surface p-6 rounded-lg shadow-md dark:shadow-none">
             {cartItems.map(item => (
-              <div key={item.id} className="flex items-center justify-between py-4 border-b last:border-b-0">
+              <div key={item.id} className="flex items-center justify-between py-4 border-b dark:border-gray-700 last:border-b-0">
                 <div className="flex items-center gap-4">
                   <Link to={`/product/${item.id}`}>
                     <img src={item.imageUrl} alt={item.name} className="w-20 h-20 object-cover rounded-md" />
                   </Link>
                   <div>
-                    <Link to={`/product/${item.id}`} className="font-bold hover:text-pistachio">{item.name}</Link>
-                    <p className="text-sm text-gray-500">{item.price} ر.س</p>
+                    <Link to={`/product/${item.id}`} className="font-bold hover:text-pistachio text-dark-text dark:text-dark-text-primary">{item.name}</Link>
+                    <p className="text-sm text-gray-500 dark:text-dark-text-secondary">{item.price} ر.س</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-4">
-                  <div className="flex items-center border border-gray-300 rounded-md">
+                  <div className="flex items-center border border-gray-300 dark:border-gray-600 rounded-md text-dark-text dark:text-dark-text-primary">
                      <button onClick={() => updateQuantity(item.id, item.quantity - 1)} className="px-3 py-1 text-md">-</button>
-                     <input type="text" value={item.quantity} readOnly className="w-10 text-center border-none focus:ring-0" />
+                     <input type="text" value={item.quantity} readOnly className="w-10 text-center border-none focus:ring-0 bg-transparent" />
                      <button onClick={() => updateQuantity(item.id, item.quantity + 1)} className="px-3 py-1 text-md">+</button>
                   </div>
                   <button onClick={() => removeFromCart(item.id)} className="text-red-500 hover:text-red-700">
@@ -52,9 +52,9 @@ export const CartPage: React.FC = () => {
               </div>
             ))}
           </div>
-          <div className="bg-white p-6 rounded-lg shadow-md h-fit">
-            <h2 className="text-xl font-bold mb-4 border-b pb-2">ملخص الطلب</h2>
-            <div className="space-y-2 mb-4">
+          <div className="bg-white dark:bg-dark-surface p-6 rounded-lg shadow-md dark:shadow-none h-fit">
+            <h2 className="text-xl font-bold mb-4 border-b dark:border-gray-700 pb-2 dark:text-dark-text-primary">ملخص الطلب</h2>
+            <div className="space-y-2 mb-4 dark:text-dark-text-secondary">
               <div className="flex justify-between">
                 <span>المجموع الفرعي</span>
                 <span>{totalPrice.toFixed(2)} ر.س</span>
@@ -63,7 +63,7 @@ export const CartPage: React.FC = () => {
                 <span>الشحن</span>
                 <span>{shippingCost === 0 ? 'مجاني' : `${shippingCost.toFixed(2)} ر.س`}</span>
               </div>
-              <div className="flex justify-between font-bold text-lg pt-2 border-t mt-2">
+              <div className="flex justify-between font-bold text-lg pt-2 border-t dark:border-gray-700 mt-2 text-dark-text dark:text-dark-text-primary">
                 <span>الإجمالي</span>
                 <span>{finalTotal.toFixed(2)} ر.س</span>
               </div>
