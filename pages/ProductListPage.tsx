@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { ProductCard } from '../components/common/ProductCard';
 import { Product } from '../types';
+import { ProductCardSkeleton } from '../components/common/ProductCardSkeleton';
 
 const API_URL = 'https://script.google.com/macros/s/AKfycbwqrAu-ujuUySs3_PzS_zE7no6q9i85OCOAKB_qBuIw_58biTw9nDK2oIlnzfFJPEXt/exec';
 
@@ -37,7 +38,16 @@ export const ProductListPage: React.FC = () => {
   }, [categoryName]);
 
   if (isLoading) {
-    return <div className="text-center py-20 dark:text-dark-text-secondary">جاري تحميل المنتجات...</div>;
+    return (
+        <div className="container mx-auto px-4 py-8">
+            <div className="h-8 bg-gray-300 dark:bg-gray-600 rounded w-1/3 mx-auto mb-8 animate-pulse"></div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                {Array.from({ length: 8 }).map((_, index) => (
+                    <ProductCardSkeleton key={index} />
+                ))}
+            </div>
+        </div>
+    );
   }
 
   return (

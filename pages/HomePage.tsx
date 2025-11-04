@@ -8,6 +8,7 @@ import { Newsletter } from '../components/home/Newsletter';
 import { Modal } from '../components/common/Modal';
 import { Button } from '../components/common/Button';
 import { Product } from '../types';
+import { ProductCardSkeleton } from '../components/common/ProductCardSkeleton';
 
 const API_URL = 'https://script.google.com/macros/s/AKfycbwqrAu-ujuUySs3_PzS_zE7no6q9i85OCOAKB_qBuIw_58biTw9nDK2oIlnzfFJPEXt/exec';
 
@@ -22,7 +23,7 @@ const SubscriptionModalContent: React.FC<{onClose: () => void}> = ({ onClose }) 
             method: 'POST',
             mode: 'cors',
             cache: 'no-cache',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
             body: JSON.stringify({ email: email })
         })
         .then(res => res.json())
@@ -113,20 +114,10 @@ export const HomePage: React.FC = () => {
   const CarouselLoader: React.FC<{title: string}> = ({ title }) => (
       <div className="py-12">
         <div className="container mx-auto px-4">
-            <h2 className="text-3xl font-bold text-center mb-8 text-dark-text dark:text-dark-text-primary">{title}</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 animate-pulse">
-                {[...Array(4)].map((_, i) => (
-                    <div key={i} className="bg-white dark:bg-dark-surface rounded-lg shadow-md h-80">
-                        <div className="h-48 bg-gray-300 dark:bg-gray-600 rounded-t-lg"></div>
-                        <div className="p-4 space-y-4">
-                            <div className="h-4 bg-gray-300 dark:bg-gray-600 rounded w-3/4"></div>
-                             <div className="h-4 bg-gray-300 dark:bg-gray-600 rounded w-1/2"></div>
-                            <div className="flex justify-between items-center pt-2">
-                                <div className="h-6 bg-gray-300 dark:bg-gray-600 rounded w-1/4"></div>
-                                <div className="h-8 bg-gray-300 dark:bg-gray-600 rounded w-1/3"></div>
-                            </div>
-                        </div>
-                    </div>
+            <div className="h-8 bg-gray-300 dark:bg-gray-600 rounded w-1/3 mx-auto mb-8 animate-pulse"></div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                 {Array.from({ length: 4 }).map((_, index) => (
+                    <ProductCardSkeleton key={index} />
                 ))}
             </div>
         </div>

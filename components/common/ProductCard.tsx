@@ -12,7 +12,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const { addToCart } = useCart();
 
   return (
-    <div className="bg-white dark:bg-dark-surface rounded-lg shadow-md dark:shadow-none dark:border dark:border-gray-800 overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 group flex flex-col">
+    <div className="bg-white dark:bg-dark-surface rounded-lg shadow-md dark:shadow-none dark:border dark:border-gray-800 overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 group flex flex-col fade-in">
       <Link to={`/product/${product.id}`} className="block overflow-hidden">
         <img src={product.imageUrl} alt={product.name} className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105" />
       </Link>

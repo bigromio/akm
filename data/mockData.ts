@@ -1,4 +1,3 @@
-
 import { Category, Product } from '../types';
 
 export const mockCategories: Category[] = [
@@ -102,8 +101,8 @@ export const mockProducts: Product[] = [
   },
 ];
 
-export const mockPromoImages: string[] = [
-  "https://picsum.photos/seed/banner1/1200/500",
-  "https://picsum.photos/seed/banner2/1200/500",
-  "https://picsum.photos/seed/banner3/1200/500",
+export const mockPromoVideos: string[] = [
+  "https://cdn.pixabay.com/video/2022/04/18/111902-701334647_large.mp4",
+  "https://cdn.pixabay.com/video/2022/05/23/115865-714041797_large.mp4",
+  "https://cdn.pixabay.com/video/2017/10/29/11913-241551000_large.mp4",
 ];

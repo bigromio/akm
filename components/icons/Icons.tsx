@@ -88,3 +88,10 @@ export const MoonIcon: React.FC<{ className?: string }> = ({ className }) => (
         <path strokeLinecap="round" strokeLinejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
     </svg>
 );
+
+export const PistachioIcon: React.FC<{ className?: string }> = ({ className }) => (
+    <svg className={className} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M15.5 12C15.5 13.2532 15.111 14.482 14.3731 15.5269C13.6352 16.5717 12.5818 17.3854 11.3621 17.8548C10.1424 18.3241 8.82823 18.4285 7.56811 18.1523C6.30799 17.8761 5.16349 17.2307 4.29289 16.36C3.4223 15.4894 2.87691 14.3449 2.50071 13.0848C2.22452 11.8247 2.32891 10.5105 2.79828 9.29083C3.26765 8.07113 4.08134 7.01777 5.12628 6.27986C6.17122 5.54196 7.40004 5.15319 8.65328 5.15319" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M19.7071 8.29289C20.4735 9.05931 20.9992 10.0305 21.2461 11.0853C21.4929 12.1402 21.4537 13.2429 21.1332 14.2882C20.8127 15.3336 20.2212 16.2878 19.4116 17.0673C18.602 17.8468 17.6006 18.4269 16.5118 18.7538" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+    </svg>
+);

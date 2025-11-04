@@ -53,14 +53,14 @@ export const CategoryNav: React.FC = () => {
   };
 
   const MobileMenu = () => (
-    <div className="absolute top-full right-0 w-full bg-white dark:bg-dark-surface shadow-lg md:hidden">
+    <div className="absolute top-full right-0 w-full bg-pistachio shadow-lg md:hidden">
         {categories.map(category => (
             <NavLink
                 key={category.id}
                 to={`/products/${category.name}`}
                 className={({ isActive }) =>
-                    `block text-right px-5 py-3 font-semibold border-b dark:border-gray-700 transition-colors duration-200 ${
-                    isActive ? 'text-pistachio' : 'text-dark-text dark:text-dark-text-primary hover:bg-light-beige dark:hover:bg-gray-700'
+                    `block text-right px-5 py-3 font-semibold border-b border-light-beige/20 transition-colors duration-200 ${
+                    isActive ? 'text-accent-gold' : 'text-light-beige hover:text-white'
                     }`
                 }
                 onClick={() => setMobileMenuOpen(false)}
@@ -72,11 +72,11 @@ export const CategoryNav: React.FC = () => {
   );
 
   return (
-    <nav className="bg-white dark:bg-dark-surface border-b border-light-beige dark:border-gray-800 sticky top-[80px] z-30">
+    <nav className="bg-pistachio sticky top-[80px] z-30">
       <div className="container mx-auto px-4">
         {/* Mobile Header */}
-        <div className="md:hidden flex justify-between items-center text-dark-text dark:text-dark-text-primary">
-          <span className="font-bold text-pistachio">الأقسام</span>
+        <div className="md:hidden flex justify-between items-center text-light-beige">
+          <span className="font-bold">الأقسام</span>
           <button onClick={() => setMobileMenuOpen(!isMobileMenuOpen)} className="p-2">
             {isMobileMenuOpen ? <XIcon className="h-6 w-6" /> : <MenuIcon className="h-6 w-6" />}
           </button>
@@ -88,10 +88,10 @@ export const CategoryNav: React.FC = () => {
           {canScrollLeft && (
             <button 
               onClick={() => handleScroll('left')} 
-              className="absolute left-0 top-1/2 -translate-y-1/2 bg-white/70 dark:bg-dark-surface/70 backdrop-blur-sm rounded-full p-1 shadow-md hover:bg-light-beige dark:hover:bg-gray-700 z-10"
+              className="absolute left-0 top-1/2 -translate-y-1/2 bg-black/5 backdrop-blur-sm rounded-full p-1 shadow-md hover:bg-black/10 z-10"
               aria-label="Scroll left"
             >
-              <ChevronLeftIcon className="h-6 w-6 text-dark-text dark:text-dark-text-primary" />
+              <ChevronLeftIcon className="h-6 w-6 text-light-beige" />
             </button>
           )}
           <div className="flex-grow overflow-hidden">
@@ -103,8 +103,8 @@ export const CategoryNav: React.FC = () => {
                     className={({ isActive }) =>
                       `block whitespace-nowrap px-5 py-3 font-semibold border-b-2 transition-colors duration-200 ${
                         isActive
-                          ? 'border-pistachio text-pistachio'
-                          : 'border-transparent text-dark-text dark:text-dark-text-secondary hover:text-pistachio dark:hover:text-pistachio hover:border-accent-gold'
+                          ? 'border-accent-gold text-light-beige'
+                          : 'border-transparent text-light-beige/80 hover:text-light-beige hover:border-accent-gold/50'
                       }`
                     }
                   >
@@ -117,10 +117,10 @@ export const CategoryNav: React.FC = () => {
           {canScrollRight && (
             <button 
               onClick={() => handleScroll('right')}
-              className="absolute right-0 top-1/2 -translate-y-1/2 bg-white/70 dark:bg-dark-surface/70 backdrop-blur-sm rounded-full p-1 shadow-md hover:bg-light-beige dark:hover:bg-gray-700 z-10"
+              className="absolute right-0 top-1/2 -translate-y-1/2 bg-black/5 backdrop-blur-sm rounded-full p-1 shadow-md hover:bg-black/10 z-10"
               aria-label="Scroll right"
             >
-              <ChevronRightIcon className="h-6 w-6 text-dark-text dark:text-dark-text-primary" />
+              <ChevronRightIcon className="h-6 w-6 text-light-beige" />
             </button>
           )}
         </div>
