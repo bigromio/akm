@@ -30,7 +30,7 @@ html.dark .custom-scrollbar::-webkit-scrollbar-track {
   border-radius: 10px;
 }
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: #87a96b;
+  background: #a6d184ff;
 }
 
 @keyframes fadeInUp {
