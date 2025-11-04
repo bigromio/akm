@@ -3,6 +3,8 @@ import { useCart } from '../contexts/CartContext';
 import { Button } from '../components/common/Button';
 import { useNavigate } from 'react-router-dom';
 
+const API_URL = 'https://script.google.com/macros/s/AKfycbwqrAu-ujuUySs3_PzS_zE7no6q9i85OCOAKB_qBuIw_58biTw9nDK2oIlnzfFJPEXt/exec';
+
 const FormInput: React.FC<React.InputHTMLAttributes<HTMLInputElement> & { label: string }> = ({ label, id, ...props }) => (
   <div>
     <label htmlFor={id} className="block text-sm font-medium text-gray-700 dark:text-dark-text-secondary mb-1">{label}</label>
@@ -20,9 +22,11 @@ export const CheckoutPage: React.FC = () => {
   const [formData, setFormData] = useState({
     fullName: '',
     phone: '',
+    email: '',
     city: '',
     address: '',
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target;
@@ -41,17 +45,42 @@ export const CheckoutPage: React.FC = () => {
       return;
     }
 
+    setIsSubmitting(true);
+
     const orderData = {
-      customer: formData,
+      name: formData.fullName,
+      email: formData.email,
+      phone: formData.phone,
+      address: `${formData.address}, ${formData.city}`,
       items: cartItems.map(item => ({ id: item.id, name: item.name, quantity: item.quantity, price: item.price })),
       total: totalPrice + (totalPrice >= 250 ? 0 : 25),
-      timestamp: new Date().toISOString(),
     };
 
-    console.log("Order Submitted:", JSON.stringify(orderData, null, 2));
-    alert('تم تأكيد طلبك بنجاح! سيتم التواصل معك قريباً.');
-    clearCart();
-    navigate('/');
+    fetch(`${API_URL}?action=addOrder`, {
+      method: 'POST',
+      mode: 'cors',
+      cache: 'no-cache',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(orderData)
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.status === 'success') {
+        alert('تم تأكيد طلبك بنجاح! سيتم التواصل معك قريباً.');
+        clearCart();
+        navigate('/');
+      } else {
+        alert('حدث خطأ: ' + data.message);
+      }
+      setIsSubmitting(false);
+    })
+    .catch(error => {
+      console.error('Error submitting order:', error);
+      alert('حدث خطأ فادح. الرجاء المحاولة مرة أخرى.');
+      setIsSubmitting(false);
+    });
   };
 
   const shippingCost = totalPrice >= 250 ? 0 : 25;
@@ -67,6 +96,7 @@ export const CheckoutPage: React.FC = () => {
             <div className="space-y-4">
               <FormInput label="الاسم الكامل" id="fullName" type="text" value={formData.fullName} onChange={handleInputChange} required />
               <FormInput label="رقم الجوال" id="phone" type="tel" value={formData.phone} onChange={handleInputChange} required />
+              <FormInput label="البريد الإلكتروني" id="email" type="email" value={formData.email} onChange={handleInputChange} required />
               <FormInput label="المدينة" id="city" type="text" value={formData.city} onChange={handleInputChange} required />
               <FormInput label="العنوان التفصيلي" id="address" type="text" value={formData.address} onChange={handleInputChange} required />
             </div>
@@ -88,14 +118,16 @@ export const CheckoutPage: React.FC = () => {
               </div>
               <div className="flex justify-between">
                 <span>الشحن</span>
-                <span>{shippingCost.toFixed(2)} ر.س</span>
+                <span>{shippingCost > 0 ? shippingCost.toFixed(2) + ' ر.س' : 'مجاني'}</span>
               </div>
               <div className="flex justify-between font-bold text-lg pt-2 border-t dark:border-gray-700 mt-2 text-dark-text dark:text-dark-text-primary">
                 <span>الإجمالي</span>
                 <span>{finalTotal.toFixed(2)} ر.س</span>
               </div>
             </div>
-            <Button type="submit" className="w-full" disabled={cartItems.length === 0}>تأكيد الطلب</Button>
+            <Button type="submit" className="w-full" disabled={cartItems.length === 0 || isSubmitting}>
+              {isSubmitting ? 'جاري التأكيد...' : 'تأكيد الطلب'}
+            </Button>
           </div>
         </form>
       </div>

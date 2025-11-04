@@ -1,13 +1,27 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
-import { mockCategories } from '../../data/mockData';
 import { MenuIcon, XIcon, ChevronLeftIcon, ChevronRightIcon } from '../icons/Icons';
+import { Category } from '../../types';
+
+const API_URL = 'https://script.google.com/macros/s/AKfycbwqrAu-ujuUySs3_PzS_zE7no6q9i85OCOAKB_qBuIw_58biTw9nDK2oIlnzfFJPEXt/exec';
 
 export const CategoryNav: React.FC = () => {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
   const scrollContainerRef = useRef<HTMLUListElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(false);
+  const [categories, setCategories] = useState<Category[]>([]);
+
+  useEffect(() => {
+    fetch(`${API_URL}?sheet=Categories`)
+      .then(res => res.json())
+      .then(jsonResponse => {
+        if (jsonResponse.status === 'success') {
+          setCategories(jsonResponse.data);
+        }
+      })
+      .catch(err => console.error("Error fetching categories:", err));
+  }, []);
 
   const checkScrollability = () => {
     const el = scrollContainerRef.current;
@@ -29,7 +43,7 @@ export const CategoryNav: React.FC = () => {
         window.removeEventListener('resize', checkScrollability);
       };
     }
-  }, []);
+  }, [categories]);
 
   const handleScroll = (direction: 'left' | 'right') => {
     if (scrollContainerRef.current) {
@@ -40,7 +54,7 @@ export const CategoryNav: React.FC = () => {
 
   const MobileMenu = () => (
     <div className="absolute top-full right-0 w-full bg-white dark:bg-dark-surface shadow-lg md:hidden">
-        {mockCategories.map(category => (
+        {categories.map(category => (
             <NavLink
                 key={category.id}
                 to={`/products/${category.name}`}
@@ -82,7 +96,7 @@ export const CategoryNav: React.FC = () => {
           )}
           <div className="flex-grow overflow-hidden">
             <ul ref={scrollContainerRef} className="flex overflow-x-auto custom-scrollbar scroll-smooth" style={{ scrollbarWidth: 'none' }}>
-              {mockCategories.map(category => (
+              {categories.map(category => (
                 <li key={category.id} className="flex-shrink-0">
                   <NavLink
                     to={`/products/${category.name}`}

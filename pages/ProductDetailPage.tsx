@@ -1,28 +1,51 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { mockProducts } from '../data/mockData';
 import { Product } from '../types';
 import { Button } from '../components/common/Button';
 import { useCart } from '../contexts/CartContext';
 import { ProductCarousel } from '../components/home/ProductCarousel';
 
+const API_URL = 'https://script.google.com/macros/s/AKfycbwqrAu-ujuUySs3_PzS_zE7no6q9i85OCOAKB_qBuIw_58biTw9nDK2oIlnzfFJPEXt/exec';
+
+
 export const ProductDetailPage: React.FC = () => {
   const { productId } = useParams<{ productId: string }>();
   const [product, setProduct] = useState<Product | null>(null);
+  const [relatedProducts, setRelatedProducts] = useState<Product[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [quantity, setQuantity] = useState(1);
   const { addToCart } = useCart();
   
   useEffect(() => {
-    const foundProduct = mockProducts.find(p => p.id === Number(productId));
-    setProduct(foundProduct || null);
+    setIsLoading(true);
     window.scrollTo(0, 0);
+
+    fetch(`${API_URL}?sheet=Products`)
+      .then(res => res.json())
+      .then(jsonResponse => {
+        if (jsonResponse.status === 'success') {
+          const allProducts: Product[] = jsonResponse.data;
+          const foundProduct = allProducts.find(p => p.id === Number(productId));
+          setProduct(foundProduct || null);
+          if (foundProduct) {
+              setRelatedProducts(allProducts.filter(p => p.category === foundProduct.category && p.id !== foundProduct.id));
+          }
+        }
+        setIsLoading(false);
+      })
+      .catch(err => {
+        console.error("Error fetching product details:", err);
+        setIsLoading(false);
+      });
   }, [productId]);
+  
+  if (isLoading) {
+    return <div className="text-center py-20 dark:text-dark-text-secondary">جاري تحميل المنتج...</div>;
+  }
 
   if (!product) {
     return <div className="text-center py-20 dark:text-dark-text-secondary">المنتج غير موجود. <Link to="/" className="text-pistachio hover:underline">العودة للرئيسية</Link></div>;
   }
-  
-  const relatedProducts = mockProducts.filter(p => p.category === product.category && p.id !== product.id);
 
   return (
     <div className="fade-in-up">
