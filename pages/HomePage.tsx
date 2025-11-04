@@ -10,7 +10,7 @@ import { Button } from '../components/common/Button';
 import { Product } from '../types';
 import { ProductCardSkeleton } from '../components/common/ProductCardSkeleton';
 
-const API_URL = 'https://script.google.com/macros/s/AKfycbwqrAu-ujuUySs3_PzS_zE7no6q9i85OCOAKB_qBuIw_58biTw9nDK2oIlnzfFJPEXt/exec';
+const API_URL = import.meta.env.VITE_APPS_SCRIPT_URL;
 
 const SubscriptionModalContent: React.FC<{onClose: () => void}> = ({ onClose }) => {
     const [email, setEmail] = useState('');
